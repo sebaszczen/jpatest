@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>PatientForm</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:powderblue">
+
+
+<datalist id="man">
+    <option th:each="man : ${manList}" th:value="${man.id}"
+            th:label="${man.name}"></option>
+</datalist>
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">Menu</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/man/form">New man</a></li>
+            <li><a href="/woman/form">New woman</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<form th:action="@{/woman/form}" th:object="${woman}" method="post">
+    <div class="col-xs-3">
+        <div class="thumbnail">
+            <label for="name">Woman name:</label>
+            <input type="text" class="form-control" th:field="*{name}">
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></td>
+        </div>
+
+
+        <div class="form-group">
+            <label for="man">Choose man:</label>
+            <input list="man" class="form-control" name="clientId">
+
+            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="reset" class="btn btn-warning">Reset</button>
+            
+
+        </div>
+
+    </div>
+
+</form>
+
+
+</body>
+</html>
